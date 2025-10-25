@@ -1,46 +1,114 @@
-# Pizzaz MCP server (Python)
+# Learn Anything - Roadmap and Anki-style Flashcard Learning App
 
-This directory packages a Python implementation of the Pizzaz demo server using the `FastMCP` helper from the official Model Context Protocol SDK. It mirrors the Node example and exposes each pizza widget as both a resource and a tool.
+A comprehensive learning application that generates personalized roadmaps and interactive flashcard systems to help users learn any topic effectively.
 
-## Prerequisites
+## Features
 
+### 🎯 Core Learning Features
+- **Personalized Learning Roadmaps**: Generate custom learning paths with modules, milestones, and resources
+- **Anki-style Flashcard System**: Interactive flashcards with spaced repetition and progress tracking
+- **Learning Dashboard**: Comprehensive progress tracking and session management
+- **Multi-source Content Integration**: YouTube videos, academic papers, books, and articles
+
+### 🛠️ Technical Implementation
+- **Backend**: FastAPI with MCP server architecture
+- **Frontend**: Modern HTML5 with CSS3 animations and responsive design
+- **Integrations**: YouTube Data API, academic search, content extraction
+- **Async Processing**: Full async/await implementation for performance
+
+## 🚀 Quick Start
+
+### Prerequisites
 - Python 3.10+
-- uv (recommended for dependency management)
+- uv package manager
+- Dependencies listed in requirements.txt
 
-## Installation
-
+### Installation
 ```bash
-# Install uv if you haven't already
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Clone the repository
+git clone <repository-url>
 
 # Install dependencies
+cd learn_anything_app
 uv sync
-```
 
-> **Heads up:** There is a similarly named package named `modelcontextprotocol`
-> on PyPI that is unrelated to the official MCP SDK. This project uses the
-> official `mcp` distribution with its FastAPI extra so that the
-> `mcp.server.fastmcp` module is available. If you previously installed the
-> other project, run `uv pip uninstall modelcontextprotocol` before reinstalling
-> the dependencies.
-
-## Run the server
-
-```bash
+# Run the application
 uv run python main.py
 ```
 
-This boots a FastAPI app with uvicorn on `http://127.0.0.1:8202` (equivalently `uv run uvicorn pizzaz_server_python.main:app --port 8202`). The endpoints mirror the Node demo:
+### Deployment
+The application runs on port 9000 and can be accessed via Cloudflare tunnel for ChatGPT integration.
 
-- `GET /mcp` exposes the SSE stream.
-- `POST /mcp/messages?sessionId=...` accepts follow-up messages for an active session.
+## 📚 App Structure
 
-Cross-origin requests are allowed so you can drive the server from local tooling or the MCP Inspector. Each tool returns structured content that echoes the requested topping plus metadata that points to the correct Skybridge widget shell, matching the original Pizzaz documentation.
+```
+learn_anything_app/
+├── main.py                 # Main MCP server application
+├── youtube_integration.py    # YouTube video search and integration
+├── content_extraction.py   # PDF/book/article content extraction
+├── assets/                  # Frontend HTML components
+│   ├── learning-roadmap.html
+│   ├── flashcard-session.html
+│   └── learning-dashboard.html
+├── pyproject.toml           # Project configuration
+├── requirements.txt          # Python dependencies
+└── README.md               # This file
+```
 
-## Next steps
+## 🔧 MCP Tools
 
-Use these handlers as a starting point when wiring in real data, authentication, or localization support. The structure demonstrates how to:
+### 1. Generate Learning Roadmap
+- **Input**: Topic, current level, learning style, time commitment
+- **Output**: Personalized roadmap with modules, resources, milestones
 
-1. Register reusable UI resources that load static HTML bundles.
-2. Associate tools with those widgets via `_meta.openai/outputTemplate`.
-3. Ship structured JSON alongside human-readable confirmation text.
+### 2. Start Flashcard Session
+- **Input**: Topic, difficulty, card count
+- **Output**: Interactive flashcard interface with progress tracking
+
+### 3. Learning Dashboard
+- **Input**: User ID (optional)
+- **Output**: Progress stats, recent sessions, achievements
+
+## 🎨 UI Features
+
+### Roadmap Interface
+- Gradient backgrounds and modern design
+- Interactive resource cards with thumbnails
+- Progress bars and milestone tracking
+- Responsive design for all devices
+
+### Flashcard Interface
+- 3D flip animations
+- Color-coded difficulty indicators
+- Real-time progress tracking
+- Keyboard shortcuts support
+- Session completion analytics
+
+### Dashboard Design
+- Animated statistics cards
+- Achievement badges
+- Visual progress indicators
+- Interactive session management
+
+## 🌐 Integration Capabilities
+
+### YouTube Integration
+- Educational video search and integration
+- Video metadata extraction (duration, views, likes)
+- Embeddable video URLs
+- Content filtering by duration and relevance
+
+### Content Extraction
+- Academic paper search and integration
+- Book search with metadata
+- PDF and article content extraction
+- Key concept identification
+- Study question generation from content
+
+## 📱 Usage in ChatGPT
+
+1. **Generate Roadmap**: "Create a learning roadmap for [topic]"
+2. **Flashcard Session**: "Start flashcard practice for [topic]"
+3. **Dashboard**: "Show my learning progress"
+
+The app provides personalized learning experiences with beautiful, modern interfaces that make learning engaging and effective!
